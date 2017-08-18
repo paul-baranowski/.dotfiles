@@ -1,4 +1,5 @@
 set nocompatible
+set modifiable
 filetype off
 
 " set the runtime path to include Vundle and initialize
@@ -7,26 +8,39 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 " call vundle#begin('~/some/path/here')
 "
-" Let VUndle manage Vundle, required
+" Let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" Nerd Tree Plugins
 Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'airblade/vim-gitgutter'
+Plugin 'xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/nerdcommenter'
+
+" Status Tabline
+Plugin 'bling/vim-airline'
+" -- Shows changes in the files by using + and - in the gutter
+Plugin 'airblade/vim-gitgutter'
+
+" Finder
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'wincent/command-t'
-Plugin 'tomtom/tcomment_vim'
+
+" Code Formatting
+Plugin 'pangloss/vim-javascript'
+Plugin 'mattn/emmet-vim'
 Plugin 'ap/vim-css-color'
+" -- plugin to change wraps like cs"' cahnges all doubles to singles
+Plugin 'tpope/vim-surround'
+Plugin 'tomtom/tcomment_vim'
 Plugin 'posva/vim-vue'
 Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'wakatime/vim-wakatime'
-Plugin 'w0ng/vim-hybrid'
-Plugin 'tpope/vim-surround'
-Plugin 'mattn/emmet-vim'
-Plugin 'xuyuanp/nerdtree-git-plugin'
 Plugin 'yggdroot/indentline'
+
+" Text Formatting / Look and feel
+Plugin 'chriskempson/base16-vim'
+
+" Track time spent
+Plugin 'wakatime/vim-wakatime'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -56,13 +70,12 @@ set backspace=2
 set showmatch
 
 " Color Scheme
+set t_Co=256
 set background=dark
-colorscheme hybrid
-let g:hybrid_custom_term_colors = 1
-let g:hybrid_reduced_contrast = 1
-set showcmd
+colorscheme base16-materia
+set showcmd 
 
-" Turn Backkup off
+" Turn Backkup off	
 set nobackup
 set nowb
 set noswapfile
@@ -179,6 +192,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 map <leader>/ gc
 
 " NerdTree
+let NERDTreeShowHidden=1
 map <C-n> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -187,3 +201,9 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 let g:airline_powerline_fonts=1
+
+"Enable Mouse clicks
+set mouse=a
+
+"Emmet
+let g:user_emmet_leader_key=','

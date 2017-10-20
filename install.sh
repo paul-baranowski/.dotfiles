@@ -1,12 +1,9 @@
+#!/bin/bash
 set -e
 
 # Check if homebrew is installed and if not install it
-which -s brew
-if [[ $? !=0 ]] ; then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-else 
-  brew update
-fi
+echo "Checking for homebrew"
+command -v brew >/dev/null 2>&1 || { echo >&2 "Installing Homebrew Now"; \ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
 
 #Brew specific installs
 # -- Check if Git is installed
@@ -28,12 +25,15 @@ command -v zsh | sudo tee -a /etc/shells
 sudo chsh -s $(which zsh)
 
 # Install zsh theme
-npm install -g spaceship-zsh-theme
+# echo "installing zsh theme"
+# npm install -g spaceship-zsh-theme
 
 echo -n "SymLinking dotfiles..."
 #Symlink .zshrc and .vimrc
-ln -s $HOME/.dotfiles/.vimrc $HOME/.vimrc
+ln -s $HOME/Desktop/GitHub/.dotfiles/.vimrc $HOME/.vimrc
 mkdir $HOME/.vim/
-ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
-ln -s $HOME/.dotfiles/git/gitconfig $HOME/.gitconfig
+ln -s $HOME/Desktop/GitHub/.dotfiles/.zshrc $HOME/.zshrc
+ln -s $HOME/Desktop/GitHub/.dotfiles/.oh-my-zsh $HOME/.oh-my-zsh
+ln -s $HOME/Desktop/GitHub/.dotfiles/git/gitconfig $HOME/.gitconfig
+ln -s $HOME/Desktop/GitHub/.dotfiles/.wakatime.cfg $HOME/.wakatime.cfg
 echo 'done!'

@@ -1,0 +1,22 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "Atom One Dark",
+    "editor.tabSize": 2,
+    "git.enabled": true,
+    "git.autorefresh": true,
+    "git.autofetch": true,
+    "git.countBadge": "all",
+    "css.validate": true,
+    "scss.validate": true,
+    "files.exclude": {
+        "**/*.psd": true,
+        "**/.DS_Store": true,
+        "**/.git": true,
+        "**/.sass-cache": true,
+        "**/node_modules*": true,
+        "**/npm-debug.log*": true,
+        "**/yarn.lock": true
+    },
+    "terminal.external.osxExec": "iTerm.app",
+    "workbench.sideBar.location": "left",
+}

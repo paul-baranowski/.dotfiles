@@ -24,18 +24,17 @@ echo "Changing shell to zsh"
 command -v zsh | sudo tee -a /etc/shells
 sudo chsh -s $(which zsh)
 
-# Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-# Install zsh theme
-# echo "installing zsh theme"
-# npm install -g spaceship-zsh-theme
-
+# Symlinking files
 echo -n "SymLinking dotfiles..."
-#Symlink .zshrc and .vimrc
-ln -s $HOME/Desktop/GitHub/.dotfiles/.vimrc $HOME/.vimrc
+ln -sf $HOME/Desktop/GitHub/.dotfiles/bash/bash_profile $HOME/.bash_profile
+ln -sf $HOME/Desktop/GitHub/.dotfiles/.vimrc $HOME/.vimrc
 mkdir $HOME/.vim/
-ln -s $HOME/Desktop/GitHub/.dotfiles/.zshrc $HOME/.zshrc
-ln -s $HOME/Desktop/GitHub/.dotfiles/git/gitconfig $HOME/.gitconfig
-ln -s $HOME/Desktop/GitHub/.dotfiles/.wakatime.cfg $HOME/.wakatime.cfg
+ln -sf $HOME/Desktop/GitHub/.dotfiles/.zshrc $HOME/.zshrc
+ln -sf $HOME/Desktop/GitHub/.dotfiles/git/gitconfig $HOME/.gitconfig
+ln -sf $HOME/Desktop/GitHub/.dotfiles/.wakatime.cfg $HOME/.wakatime.cfg
 echo 'done!'
+
+# Install oh-my-zsh
+echo "Installing oh-my-zsh and themes"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+curl -o - https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/install.zsh | zsh

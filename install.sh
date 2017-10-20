@@ -24,6 +24,9 @@ echo "Changing shell to zsh"
 command -v zsh | sudo tee -a /etc/shells
 sudo chsh -s $(which zsh)
 
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 # Install zsh theme
 # echo "installing zsh theme"
 # npm install -g spaceship-zsh-theme
@@ -33,7 +36,6 @@ echo -n "SymLinking dotfiles..."
 ln -s $HOME/Desktop/GitHub/.dotfiles/.vimrc $HOME/.vimrc
 mkdir $HOME/.vim/
 ln -s $HOME/Desktop/GitHub/.dotfiles/.zshrc $HOME/.zshrc
-ln -s $HOME/Desktop/GitHub/.dotfiles/.oh-my-zsh $HOME/.oh-my-zsh
 ln -s $HOME/Desktop/GitHub/.dotfiles/git/gitconfig $HOME/.gitconfig
 ln -s $HOME/Desktop/GitHub/.dotfiles/.wakatime.cfg $HOME/.wakatime.cfg
 echo 'done!'

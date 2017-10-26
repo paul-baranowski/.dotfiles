@@ -47,6 +47,11 @@ if [[ $? -eq 0 ]];then
     else
         ok "Skipping user config overwriting.";
     fi
+
+    echo -n "SymLinking dotfiles..."
+        ln -sf $HOME/Desktop/GitHub/.dotfiles/config/vs-code/keybindings.json $HOME/Library/Application Support/Code/User/keybindings.json
+    echo 'done!'
+    
 else
     error "It looks like the command 'code' isn't accessible."
     error "Please make sure you have Visual Studio Code installed"

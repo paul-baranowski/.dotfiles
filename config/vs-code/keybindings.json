@@ -1,0 +1,21 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+    {
+        "key": "enter",
+        "command": "explorer.openToSide",
+        "when": "explorerViewletFocus && explorerViewletVisible"
+    },
+    { 
+        "key": "cmd+enter",
+        "command": "renameFile",
+        "when": "explorerViewletVisible && filesExplorerFocus" 
+    },
+    { 
+        "key": "cmd+e",
+        "command": "workbench.view.explorer" 
+    },
+    { 
+        "key": "cmd+`",
+        "command": "workbench.action.terminal.toggleTerminal" 
+    }
+]

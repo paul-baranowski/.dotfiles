@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 source ../../lib.sh
 
-bot "Installing Visual Studio code extensions and config."
+echo "Installing Visual Studio code extensions and config."
 
 code -v > /dev/null
 if [[ $? -eq 0 ]];then
     read -r -p "Do you want to install VSC extensions? [y|N] " configresponse
     if [[ $configresponse =~ ^(y|yes|Y) ]];then
-        ok "Installing extensions please wait..."
+        echo "Installing extensions please wait..."
         code --install-extension christian-kohler.path-intellisense
         code --install-extension akamud.vscode-theme-onedark
         code --install-extension PeterJausovec.vscode-docker
@@ -27,25 +27,25 @@ if [[ $? -eq 0 ]];then
         code --install-extension octref.vetur
         code --install-extension WakaTime.vscode-wakatime
         code --install-extension cssho.vscode-svgviewer
-        ok "Extensions for VSC have been installed. Please restart your VSC."
+        echo "Extensions for VSC have been installed. Please restart your VSC."
     else
-        ok "Skipping extension install.";
+        echo "Skipping extension install.";
     fi
 
     read -r -p "Do you want to overwrite user config? [y|N] " configresponse
     if [[ $configresponse =~ ^(y|yes|Y) ]];then
         read -r -p "Do you want to back up your current user config? [Y|n] " backupresponse
         if [[ $backupresponse =~ ^(n|no|N) ]];then
-            ok "Skipping user config save."
+            echo "Skipping user config save."
         else
             cp $HOME/Library/Application\ Support/Code/User/settings.json $HOME/Library/Application\ Support/Code/User/settings.backup.json
-            ok "Your previous config has been saved to: $HOME/Library/Application Support/Code/User/settings.backup.json"
+            echo "Your previous config has been saved to: $HOME/Library/Application Support/Code/User/settings.backup.json"
         fi
         ln -s ./settings.json $HOME/Library/Application\ Support/Code/User/settings.json
 
-        ok "New user config has been written. Please restart your VSC."
+        echo "New user config has been written. Please restart your VSC."
     else
-        ok "Skipping user config overwriting.";
+        echo "Skipping user config overwriting.";
     fi
 
     echo -n "SymLinking dotfiles..."

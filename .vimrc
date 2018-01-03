@@ -72,7 +72,7 @@ set showmatch
 " Color Scheme
 set t_Co=256
 set background=dark
-colorscheme base16-materia
+" colorscheme base16-materia
 set showcmd 
 
 " Turn Backkup off	

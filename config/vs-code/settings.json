@@ -20,11 +20,20 @@
     },
     "terminal.external.osxExec": "iTerm.app",
     "workbench.sideBar.location": "left",
-    "javascript.format.enable": false,
+    "javascript.format.enable": true,
     "prettier.eslintIntegration": true,
     "prettier.tabWidth": 2,
     "prettier.singleQuote": true,
     "prettier.bracketSpacing": true,
-    "prettier.printWidth": 80,
+    "prettier.printWidth": 100,
     "prettier.trailingComma": "es5",
+    "files.associations": {
+        "*.jsx": "javascriptreact"
+    },
+    "python.linting.enabledWithoutWorkspace": false,
+    "python.disablePromptForFeatures": [
+        "pylint"
+    ],
+    "material-icon-theme.showUpdateMessage": false,
+    "editor.minimap.enabled": false,
 }

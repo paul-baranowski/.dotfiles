@@ -29,7 +29,6 @@ brew tap caskroom/cask
 
 CASKS=(
     firefox
-    google-chrome
     google-drive-file-stream
     iterm2
     visual-studio-code
@@ -42,7 +41,7 @@ CASKS=(
 
 # -- Install apps
 echo "Installing cask apps..."
-brew cask install ${CASKS[@]}
+# brew cask install ${CASKS[@]}
 
 # -- Install zsh
 echo "Checking zsh"

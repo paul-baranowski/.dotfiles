@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+
 # Check if homebrew is installed and if not install it
 echo "Checking for homebrew"
 if test ! $(which brew); then
@@ -55,8 +56,9 @@ sudo chsh -s $(which zsh)
 # -- Symlinking files
 echo -n "SymLinking dotfiles..."
 ln -sf $HOME/Desktop/GitHub/.dotfiles/bash/bash_profile $HOME/.bash_profile
-ln -sf $HOME/Desktop/GitHub/.dotfiles/.vimrc $HOME/.vimrc
+ln -sf $HOME/Desktop/GitHub/.dotfiles/.vim/.vimrc $HOME/.vimrc
 mkdir $HOME/.vim/
+ln -sf $HOME/Desktop/GitHub/.dotfiles/.vim/colors $HOME/.vim/colors
 ln -sf $HOME/Desktop/GitHub/.dotfiles/.zshrc $HOME/.zshrc
 ln -sf $HOME/Desktop/GitHub/.dotfiles/git/gitconfig $HOME/.gitconfig
 ln -sf $HOME/Desktop/GitHub/.dotfiles/.wakatime.cfg $HOME/.wakatime.cfg

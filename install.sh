@@ -20,17 +20,24 @@ if test ! $(node --version); then
     echo "Installing node..."
     brew install node
 fi
+
+# -- Installing tmux
 echo "installing tmux"
 brew install tmux
 # -- Clean up
 echo "Cleaning up..."
 brew cleanup
 
+# -- Install pip
+echo "Installing pip"
+sudo easy_install pip
+
 # -- Install cask
 echo "Installing cask..."
 brew tap caskroom/cask
 
 CASKS=(
+    docker
     firefox
     google-drive-file-stream
     iterm2
@@ -44,7 +51,7 @@ CASKS=(
 
 # -- Install apps
 echo "Installing cask apps..."
-# brew cask install ${CASKS[@]}
+brew cask install ${CASKS[@]}
 
 # -- Install zsh
 echo "Checking zsh"
@@ -59,6 +66,12 @@ sudo chsh -s $(which zsh)
 echo "Installing oh-my-zsh and themes"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 curl -o - https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/install.zsh | zsh
+
+# -- Install AWS CLI
+echo "Installing aws cli"
+sudo mkdir /usr/local/Frameworks
+sudo chown $(whoami):admin /usr/local/Frameworks
+brew install awscli
 
 # -- Symlinking files
 echo -n "SymLinking dotfiles..."

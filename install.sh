@@ -20,6 +20,8 @@ if test ! $(node --version); then
     echo "Installing node..."
     brew install node
 fi
+echo "installing tmux"
+brew install tmux
 # -- Clean up
 echo "Cleaning up..."
 brew cleanup
@@ -53,21 +55,21 @@ echo "Changing shell to zsh"
 command -v zsh | sudo tee -a /etc/shells
 sudo chsh -s $(which zsh)
 
-# -- Symlinking files
-echo -n "SymLinking dotfiles..."
-ln -sf $HOME/Desktop/GitHub/.dotfiles/bash/bash_profile $HOME/.bash_profile
-ln -sf $HOME/Desktop/GitHub/.dotfiles/.vim/.vimrc $HOME/.vimrc
-mkdir $HOME/.vim/
-ln -sf $HOME/Desktop/GitHub/.dotfiles/.vim/colors $HOME/.vim/colors
-ln -sf $HOME/Desktop/GitHub/.dotfiles/.zshrc $HOME/.zshrc
-ln -sf $HOME/Desktop/GitHub/.dotfiles/git/gitconfig $HOME/.gitconfig
-ln -sf $HOME/Desktop/GitHub/.dotfiles/.wakatime.cfg $HOME/.wakatime.cfg
-echo 'done!'
-
 # -- Install oh-my-zsh
 echo "Installing oh-my-zsh and themes"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 curl -o - https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/install.zsh | zsh
+
+# -- Symlinking files
+echo -n "SymLinking dotfiles..."
+ln -sf $HOME/Desktop/GitHub/.dotfiles/bash/bash_profile $HOME/.bash_profile
+ln -sf $HOME/Desktop/GitHub/.dotfiles/vim/.vimrc $HOME/.vimrc
+mkdir $HOME/.vim/
+ln -sf $HOME/Desktop/GitHub/.dotfiles/vim/colors $HOME/.vim/colors
+ln -sf $HOME/Desktop/GitHub/.dotfiles/zsh/.zshrc $HOME/.zshrc
+ln -sf $HOME/Desktop/GitHub/.dotfiles/git/gitconfig $HOME/.gitconfig
+ln -sf $HOME/Desktop/GitHub/.dotfiles/.wakatime.cfg $HOME/.wakatime.cfg
+echo 'done!'
 
 # -- Configure OS
 echo "Configuring OS..."

@@ -97,7 +97,9 @@ if [ -f '/Users/pbaranowski/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/pbaranowski/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/pbaranowski/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
-# The next few lines add export PATH'S for Android Studio / React Native development
+source $HOME"/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+
+# Google Android
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools

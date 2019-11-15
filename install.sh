@@ -1,163 +1,158 @@
-#!/bin/bash
-set -e
+#!/bin/sh
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Greetings. Preparing to power up and begin diagnostics.$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
+INSTALLDIR=$PWD
 
-# Check if homebrew is installed and if not install it
-echo "Checking for homebrew"
-if test ! $(which brew); then
-    echo "Installing homebrew..."
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Checking for Homebrew installation.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+brew="/usr/local/bin/brew"
+if [ -f "$brew" ]
+then
+  echo "---------------------------------------------------------"
+  echo "$(tput setaf 2)GLaDOS: Homebrew is installed.$(tput sgr 0)"
+  echo "---------------------------------------------------------"
+else
+  echo "---------------------------------------------------------"
+  echo "$(tput setaf 3)GLaDOS: Installing Homebrew. Homebrew requires osx command lines tools, please download xcode first$(tput sgr 0)"
+  echo "---------------------------------------------------------"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
-# command -v brew >/dev/null 2>&1 || { echo >&2 "Installing Homebrew Now"; \ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing system packages.$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
-#Brew specific installs
-# -- Check if Git is installed
-echo "Checking if git is installed"
-which -s git || brew install git
-# -- Check if node is installed
-echo "Checking for node"
-if test ! $(node --version); then
-    echo "Installing node..."
-    brew install node
-fi
-
-# -- Installing tmux
-echo "installing tmux"
-brew install tmux
-# -- Clean up
-echo "Cleaning up..."
-brew cleanup
-
-# -- Install pip
-echo "Installing pip"
-sudo easy_install pip
-
-# -- Install cask
-echo "Installing cask..."
-brew tap caskroom/cask
-
-CASKS=(
-    docker
-    firefox
-    google-drive-file-stream
-    iterm2
-    visual-studio-code
-    skype
-    slack
-    whatsapp
-    spectacle
-    vlc
+packages=(
+  "git"
+  "node"
+  "ruby"
+  "tmux"
+  "neovim"
+  "python3"
+  "zsh"
+  "ripgrep"
+  "fzf"
+  "z"
 )
 
-# -- Install apps
-echo "Installing cask apps..."
-brew cask install ${CASKS[@]} || true
+for i in "${packages[@]}"
+do
+  brew install $i
+  echo "---------------------------------------------------------"
+done
 
-# -- Install zsh
-echo "Checking zsh"
-which -s zsh || brew install zsh
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing Python NeoVim client.$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
-# -- Change shell to zsh
-echo "Changing shell to zsh"
-command -v zsh | sudo tee -a /etc/shells
-sudo chsh -s $(which zsh)
+pip3 install neovim
 
-# -- Install oh-my-zsh
-echo "Installing oh-my-zsh and themes"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || true
-curl -o - https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/install.zsh | zsh || true
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing node neovim package$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
-# -- Install AWS CLI
-echo "Installing aws cli"
-sudo mkdir /usr/local/Frameworks || true
-sudo chown $(whoami):admin /usr/local/Frameworks || true
-brew install awscli || true
+npm install -g neovim
 
-# -- Symlinking files
-echo -n "SymLinking dotfiles..."
-ln -sf $HOME/Desktop/GitHub/.dotfiles/bash/bash_profile $HOME/.bash_profile
-ln -sf $HOME/Desktop/GitHub/.dotfiles/vim/.vimrc $HOME/.vimrc
-mkdir $HOME/.vim/ || true
-ln -sf $HOME/Desktop/GitHub/.dotfiles/vim/colors $HOME/.vim/colors
-ln -sf $HOME/Desktop/GitHub/.dotfiles/zsh/.zshrc $HOME/.zshrc
-ln -sf $HOME/Desktop/GitHub/.dotfiles/git/gitconfig $HOME/.gitconfig
-ln -sf $HOME/Desktop/GitHub/.dotfiles/.wakatime.cfg $HOME/.wakatime.cfg
-echo 'done!'
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing spaceship prompt$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
-# -- Configure OS
-echo "Configuring OS..."
+npm install -g spaceship-prompt
 
-# -- Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing vim linter (vint)$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
-# -- Trackpad: enable tap to click for this user and for the login screen
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+pip3 install vim-vint
 
-# -- Trackpad: map bottom right corner to right-click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing bash language server$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
-# -- Disable "natural" scroll
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+npm i -g bash-language-server
 
-# -- Increase sound quality for Bluetooth headphones/headsets
-defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing colorls$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
-# -- Disable press-and-hold for keys in favor of key repeat
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+gem install colorls
 
-# -- Disable the “Are you sure you want to open this application?” dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing system fonts.$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
-# -- Set Desktop as the default location for new Finder windows
-# -- For other paths, use `PfLo` and `file:///full/path/here/`
-defaults write com.apple.finder NewWindowTarget -string "PfDe"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desktop/"
+brew tap homebrew/cask-fonts
+brew cask install font-hack-nerd-font
 
-# -- Show icons for hard drives, servers, and removable media on the desktop
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+localGit="/usr/local/bin/git"
+if ! [[ -f "$localGit" ]]; then
+  echo "---------------------------------------------------------"
+  echo "$(tput setaf 1)GLaDOS: Invalid git installation. Aborting. Please install git.$(tput sgr 0)"
+  echo "---------------------------------------------------------"
+  exit 1
+fi
 
-# -- Disable the warning when changing a file extension
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+# Create backup folder if it doesn't exist
+mkdir -p ~/.local/share/nvim/backup
 
-# -- Avoid creating .DS_Store files on network or USB volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing oh-my-zsh.$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
-# -- Use list view in all Finder windows by default
-# -- Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
-defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+else
+  echo "---------------------------------------------------------"
+  echo "$(tput setaf 2)GLaDOS: oh-my-zsh already installed.$(tput sgr 0)"
+  echo "---------------------------------------------------------"
+fi
 
-# -- Disable the warning before emptying the Trash
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing zsh-autosuggestions.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
-# -- Enable AirDrop over Ethernet and on unsupported Macs running Lion
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing vtop.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+npm install -g vtop
 
-# -- Show the ~/Library folder
-chflags nohidden ~/Library
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing Neovim plugins and linking dotfiles.$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
-# -- Minimize windows into their application’s icon
-defaults write com.apple.dock minimize-to-application -bool true
+# NOTE something is up with script below
+# source install/backup.sh
+source install/link.sh
+nvim +PlugInstall +qall
+nvim +UpdateRemotePlugins +qall
 
-# -- Show indicator lights for open applications in the Dock
-defaults write com.apple.dock show-process-indicators -bool true
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing Space vim-airline theme.$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
-# -- Remove the auto-hiding Dock delay
-defaults write com.apple.dock autohide-delay -float 0
-# -- Remove the animation when hiding/showing the Dock
-defaults write com.apple.dock autohide-time-modifier -float 0
+cp ~/.config/nvim/space.vim ~/.config/nvim/plugged/vim-airline-themes/autoload/airline/themes/space.vim
 
-# -- Automatically hide and show the Dock
-defaults write com.apple.dock autohide -bool true
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Installing tmux plugin manager.$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+fi
 
-echo "Aaaannnddd we are done here, Buh Bye!"
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Switching shell to zsh. You may need to logout.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+sudo sh -c "echo $(which zsh) >> /etc/shells"
+chsh -s $(which zsh)
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: System update complete. Enjoy your cake! Enjoy.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+exit 0

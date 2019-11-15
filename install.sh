@@ -51,7 +51,7 @@ CASKS=(
 
 # -- Install apps
 echo "Installing cask apps..."
-brew cask install ${CASKS[@]}
+brew cask install ${CASKS[@]} || true
 
 # -- Install zsh
 echo "Checking zsh"
@@ -64,20 +64,20 @@ sudo chsh -s $(which zsh)
 
 # -- Install oh-my-zsh
 echo "Installing oh-my-zsh and themes"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-curl -o - https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/install.zsh | zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || true
+curl -o - https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/install.zsh | zsh || true
 
 # -- Install AWS CLI
 echo "Installing aws cli"
-sudo mkdir /usr/local/Frameworks
-sudo chown $(whoami):admin /usr/local/Frameworks
-brew install awscli
+sudo mkdir /usr/local/Frameworks || true
+sudo chown $(whoami):admin /usr/local/Frameworks || true
+brew install awscli || true
 
 # -- Symlinking files
 echo -n "SymLinking dotfiles..."
 ln -sf $HOME/Desktop/GitHub/.dotfiles/bash/bash_profile $HOME/.bash_profile
 ln -sf $HOME/Desktop/GitHub/.dotfiles/vim/.vimrc $HOME/.vimrc
-mkdir $HOME/.vim/
+mkdir $HOME/.vim/ || true
 ln -sf $HOME/Desktop/GitHub/.dotfiles/vim/colors $HOME/.vim/colors
 ln -sf $HOME/Desktop/GitHub/.dotfiles/zsh/.zshrc $HOME/.zshrc
 ln -sf $HOME/Desktop/GitHub/.dotfiles/git/gitconfig $HOME/.gitconfig

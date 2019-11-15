@@ -142,6 +142,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'posva/vim-vue'
 Plugin 'mustache/vim-mustache-handlebars'
 
+autocmd FileType vue syntax sync fromstart
 "
 " Nerd Fonts
 "
@@ -149,10 +150,45 @@ Plugin 'ryanoasis/vim-devicons'
 
 " Track time spent
 Plugin 'wakatime/vim-wakatime'
+
+"
+"Vim Jsx
+"
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0 " Allow jsx syntax in js files
+
+"
+"Ale
+"
+Plugin 'w0rp/ale'
+" Ale settings
+" let g:ale_linters = {}
+" let g:ale_linters['javascript'] = ['eslint']
+" let g:ale_linters['jsx'] = ['eslint']
+" let g:ale_fixers = {}
+" let g:ale_fixers['javascript'] = ['prettier']
+" let g:ale_fixers['jsx'] = ['prettier']
+" let g:ale_fixers['scss'] = ['prettier']
+" let g:ale_fixers['css'] = ['prettier']
+" let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --print-width 100'
+" let g:airline#extensions#ale#enabled = 1
+" let g:ale_fix_on_save = 1
+
+"
+"Prettier
+"
+Plugin 'prettier/vim-prettier'
+" Prettier Settings
+" let g:prettier#config#print_width = 100
+" let g:prettier#config#single_quote = 'true'
+" let g:prettier#config#trailing_comma = 'es5'
+" let g:prettier#config#bracket_spacing = 'true'
+" let g:prettier#config#parser = 'babylon'
+
 call vundle#end()
 
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" :PluginClean      - confirms removal of iunused plugins; append `!` to auto-approve removal

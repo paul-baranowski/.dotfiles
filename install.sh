@@ -197,6 +197,12 @@ sudo sh -c "echo $(which zsh) >> /etc/shells"
 chsh -s $(which zsh)
 
 echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Setting new preference for iTerm.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/iterm"
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
+echo "---------------------------------------------------------"
 echo "$(tput setaf 2)GLaDOS: System update complete. Enjoy your cake! Enjoy.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 

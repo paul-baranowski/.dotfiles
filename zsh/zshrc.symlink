@@ -135,3 +135,5 @@ prompt spaceship
 SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_NODE_SHOW=false
 SPACESHIP_GIT_STATUS_STASHED=''
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

@@ -3,6 +3,28 @@ echo "---------------------------------------------------------"
 echo "$(tput setaf 2)GLaDOS: Greetings. Preparing to power up and begin diagnostics.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
+
+echo "APERTURE1" "[1.000]              .,-:;//;:=,               "
+echo "APERTURE2" "[1.000]          . :H@@@MM@M#H/.,+%;,          "
+echo "APERTURE3" "[1.000]       ,/X+ +M@@M@MM%=,-%HMMM@X/,       "
+echo "APERTURE4" "[1.000]     -+@MM; $M@@MH+-,;XMMMM@MMMM@+-     "
+echo "APERTURE5" "[1.000]    ;@M@@M- XM@X;. -+XXXXXHHH@M@M#@/.   "
+echo "APERTURE6" "[1.000]  ,%MM@@MH ,@%=            .---=-=:=,.  "
+echo "APERTURE7" "[1.000]  =@#@@@MX .,              -%HX$$%%%+;  "
+echo "APERTURE8" "[1.000] =-./@M@M$                  .;@MMMM@MM: "
+echo "APERTURE9" "[1.000] X@/ -$MM/                    .+MM@@@M$ "
+echo "APERTURE10" "[1.000],@M@H: :@:                    . =X#@@@@-"
+echo "APERTURE11" "[1.000],@@@MMX, .                    /H- ;@M@M="
+echo "APERTURE12" "[1.000].H@@@@M@+,                    %MM+..%#$."
+echo "APERTURE13" "[1.000] /MMMM@MMH/.                  XM@MH; =; "
+echo "APERTURE14" "[1.000]  /%+%$XHH@$=              , .H@@@@MX,  "
+echo "APERTURE15" "[1.000]   .=--------.           -%H.,@@@@@MX,  "
+echo "APERTURE16" "[1.000]   .%MM@@@HHHXX$$$%+- .:$MMX =M@@MM%.   "
+echo "APERTURE17" "[1.000]     =XMMM@MM@MM#H;,-+HMM@M+ /MMMX=     "
+echo "APERTURE18" "[1.000]       =%@M@M#@$-.=$@MM@@@M; %M%=       "
+echo "APERTURE19" "[1.000]         ,:+$+-,/H#MMMMMMM@= =,         "
+echo "APERTURE20" "[1.000]               =++%%%%+/:-.             "
+
 INSTALLDIR=$PWD
 
 echo "---------------------------------------------------------"
@@ -20,6 +42,30 @@ else
   echo "---------------------------------------------------------"
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)GLaDOS: Checking for RVM installation.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+if rvm ; then
+    echo "---------------------------------------------------------"
+    echo "$(tput setaf 2)GLaDOS: RVM already installed.$(tput sgr 0)"
+    echo "---------------------------------------------------------"
+else
+    echo "---------------------------------------------------------"
+    echo "$(tput setaf 2)GLaDOS: Installing RVM.$(tput sgr 0)"
+    echo "---------------------------------------------------------"
+    brew install gnupg
+    gpg --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+    \curl -sSL https://get.rvm.io | bash -s stable --ruby
+    echo "---------------------------------------------------------"
+    echo "$(tput setaf 2)GLaDOS: Installing Ruby in RVM.$(tput sgr 0)"
+    echo "---------------------------------------------------------"
+    source "$HOME/.rvm/scripts/rvm";
+    rvm install ruby --latest
+    rvm use --default
+fi
+
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)GLaDOS: Installing system packages.$(tput sgr 0)"
 echo "---------------------------------------------------------"
@@ -27,7 +73,6 @@ echo "---------------------------------------------------------"
 packages=(
   "git"
   "node"
-  "ruby"
   "tmux"
   "neovim"
   "python3"

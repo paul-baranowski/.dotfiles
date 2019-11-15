@@ -41,7 +41,7 @@ if [[ $? -eq 0 ]];then
             cp $HOME/Library/Application\ Support/Code/User/settings.json $HOME/Library/Application\ Support/Code/User/settings.backup.json
             echo "Your previous config has been saved to: $HOME/Library/Application Support/Code/User/settings.backup.json"
         fi
-        ln -s ./settings.json $HOME/Library/Application\ Support/Code/User/settings.json
+        ln -s $HOME/Desktop/GitHub/.dotfiles/config/vs-code/settings.json $HOME/Library/Application\ Support/Code/User/settings.json
 
         echo "New user config has been written. Please restart your VSC."
     else
@@ -49,7 +49,7 @@ if [[ $? -eq 0 ]];then
     fi
 
     echo -n "SymLinking dotfiles..."
-        ln -sf $HOME/Desktop/GitHub/.dotfiles/config/vs-code/keybindings.json $HOME/Library/Application Support/Code/User/keybindings.json
+        ln -sf $HOME/Desktop/GitHub/.dotfiles/config/vs-code/keybindings.json $HOME/Library/Application\ Support/Code/User/keybindings.json
     echo 'done!'
     
 else

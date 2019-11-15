@@ -1,6 +1,6 @@
 {
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Atom One Dark",
+    "workbench.colorTheme": "Monokai",
     "editor.tabSize": 2,
     "editor.formatOnSave": true,
     "git.enabled": true,
@@ -36,4 +36,17 @@
     ],
     "material-icon-theme.showUpdateMessage": false,
     "editor.minimap.enabled": false,
+    "editor.fontWeight": "300",
+    "workbench.fontAliasing": "antialiased",
+    "editor.fontSize": 14,
+    "editor.fontFamily": "'Operator Mono',Menlo, Monaco, 'Courier New', monospace",
+    "explorer.confirmDragAndDrop": false,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "python.jediEnabled": false,
+    "window.zoomLevel": 0,
 }

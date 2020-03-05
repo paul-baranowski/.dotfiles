@@ -203,7 +203,7 @@ defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/iter
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 echo "---------------------------------------------------------"
-echo "$(tput setaf 2)GLaDOS: System update complete. Enjoy your cake! Enjoy.$(tput sgr 0)"
+echo "$(tput setaf 2)GLaDOS: System update complete. Enjoy your cake.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
 exit 0

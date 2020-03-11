@@ -80,6 +80,7 @@ packages=(
   "ripgrep"
   "fzf"
   "z"
+  "ffmpeg"
 )
 
 for i in "${packages[@]}"
